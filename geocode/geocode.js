@@ -2,9 +2,7 @@ const request = require('request');
 
 var geocodeAddress = (address,callback) => {
   var encodedAddress = encodeURIComponent(address);
-
   request({
-    // https://maps.googleapis.com/maps/api/geocode/json?address=1301%20lombard%20street%20philadelphia  // over query limit
     url: `http://www.mapquestapi.com/geocoding/v1/address?key=FWQcWRKAnhPCI2egavnMvrEEbpQ0RmAg&location=${encodedAddress}`,
     json: true  // convert to json directly, but clipped, not pretty
   }, (error, response, body) => {
@@ -20,7 +18,6 @@ var geocodeAddress = (address,callback) => {
       })
     }
   });
-
 }
 
 module.exports.geocodeAddress = geocodeAddress;
