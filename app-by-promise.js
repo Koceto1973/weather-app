@@ -21,18 +21,14 @@ axios(geocodeUrl)
     if (response.data.status === 'ZERO_RESULTS') {
       throw new Error('Unable to find that address.');
     }
-    console.log(response.data.results[0].locations[0].latLng.lng);
+    
     var lat = response.data.results[0].locations[0].latLng.lat;
     var lng = response.data.results[0].locations[0].latLng.lng;
     var weatherUrl = `https://api.darksky.net/forecast/1860dba77ac62242f3e468c0a0d931b4/${lat},${lng}`;
     console.log(response.data.results[0].providedLocation.location);
     return axios.get(weatherUrl);
 })
-.then((response) => {
-
-    var FtoC = (degrees) => {
-        return Math.round((degrees-32)*50/9)/10;
-    };
+.then((response) => {    
     
     var temperature = FtoC(response.data.currently.temperature);
     var apparentTemperature = FtoC(response.data.currently.apparentTemperature);
@@ -47,3 +43,6 @@ axios(geocodeUrl)
 });
 
 
+var FtoC = (degrees) => {
+  return Math.round((degrees-32)*50/9)/10;
+};
